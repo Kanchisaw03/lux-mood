@@ -3,4 +3,5 @@
 
 console.log('Vercel deployment compatibility script');
 // Exit successfully
-process.exit(0);
+// Use ES module syntax since package.json has "type": "module"
+export {}; // Empty export to make this a valid ES module
