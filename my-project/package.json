@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "postbuild": "node netlify-build.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
