@@ -1,34 +1,51 @@
 import { createContext, useState, useContext } from 'react';
 
-// Define the mood types and their properties (simplified)
+// Define the mood types and their properties with PNG images and fallback emojis
 const moodTypes = {
   calm: {
     name: 'Calm',
-    emoji: '😌',
+    emoji: '😌', // Fallback emoji
     color: 'blue',
     description: 'A tranquil state of mind, like a serene lake at dawn.',
-    theme: 'Blue Mist'
+    theme: 'Midnight Serenity'
   },
   joy: {
     name: 'Joy',
-    emoji: '😊',
+    emoji: '😊', // Fallback emoji
     color: 'pink',
     description: 'Pure happiness, like cherry blossoms dancing in spring.',
-    theme: 'Sakura'
+    theme: 'Neon Sakura'
   },
   focus: {
     name: 'Focus',
-    emoji: '🧠',
+    emoji: '🧠', // Fallback emoji
     color: 'purple',
     description: 'Deep concentration, like stars aligning in perfect clarity.',
-    theme: 'Cosmic'
+    theme: 'Cosmic Nexus'
   },
   dream: {
     name: 'Dream',
-    emoji: '✨',
+  
+    emoji: '✨', // Fallback emoji
     color: 'cyan',
     description: 'Imagination unbound, like floating through a fantasy realm.',
-    theme: 'Ethereal'
+    theme: 'Ethereal Dreamscape'
+  },
+  mystery: {
+    name: 'Mystery',
+    
+    emoji: '🌌', // Fallback emoji
+    color: 'blue',
+    description: 'Enigmatic and profound, like the depths of the cosmos.',
+    theme: 'Void Walker'
+  },
+  energy: {
+    name: 'Energy',
+
+    emoji: '⚡', // Fallback emoji
+    color: 'amber',
+    description: 'Vibrant and electric, like lightning across the night sky.',
+    theme: 'Voltage Surge'
   }
 };
 

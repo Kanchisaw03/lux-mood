@@ -421,13 +421,7 @@ function App() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.8 }}
           >
-            <button 
-              className="text-white/70 hover:text-white flex items-center justify-center gap-2 mx-auto transition-all duration-300 hover:gap-3"
-              onClick={toggleAudio}
-            >
-              <span className="text-xl">{audioEnabled ? '🔊' : '🔇'}</span>
-              <span className="tracking-wider">{audioEnabled ? 'SOUND ON' : 'SOUND OFF'}</span>
-            </button>
+            
           </motion.div>
         </motion.div>
       </div>
@@ -436,52 +430,52 @@ function App() {
 
   // Mood Selection Component with enhanced visuals
   const MoodSelection = () => {
-    // Animation variants for the container
     const containerVariants = {
       hidden: { opacity: 0 },
       visible: { 
         opacity: 1,
         transition: { 
-          duration: 0.5,
-          when: 'beforeChildren',
-          staggerChildren: 0.1
+          staggerChildren: 0.1,
+          delayChildren: 0.3
         }
       },
-      exit: {
-        opacity: 0,
-        transition: { duration: 0.3 }
-      }
-    }
+      exit: { opacity: 0, transition: { duration: 0.5 } }
+    };
     
-    // Animation variants for the cards
+    const headerVariants = {
+      hidden: { y: -50, opacity: 0 },
+      visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } }
+    };
+    
     const cardVariants = {
       hidden: { y: 50, opacity: 0 },
-      visible: { 
-        y: 0, 
-        opacity: 1,
-        transition: { duration: 0.5, ease: 'easeOut' }
-      },
-      hover: {
-        y: -10,
-        scale: 1.03,
-        transition: { duration: 0.3, ease: 'easeOut' }
-      },
-      tap: { scale: 0.98 }
-    }
+      visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+      hover: { scale: 1.05, transition: { duration: 0.3 } },
+      tap: { scale: 0.95, transition: { duration: 0.1 } }
+    };
     
-    // Animation variants for the header
-    const headerVariants = {
-      hidden: { y: -30, opacity: 0 },
-      visible: { 
-        y: 0, 
-        opacity: 1,
-        transition: { duration: 0.5, ease: 'easeOut' }
-      }
-    }
+    // Force scroll to top when component mounts
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      
+      // Add a style tag to ensure scrolling works
+      const styleEl = document.createElement('style');
+      styleEl.innerHTML = `
+        body, html, #root {
+          height: auto !important;
+          overflow: auto !important;
+        }
+      `;
+      document.head.appendChild(styleEl);
+      
+      return () => {
+        document.head.removeChild(styleEl);
+      };
+    }, []);
     
     return (
       <motion.div 
-        className="h-screen w-screen bg-gradient-to-br from-black via-purple-950 to-indigo-950 flex flex-col items-center justify-center p-6 overflow-hidden relative"
+        className="h-screen w-full bg-gradient-to-br from-black via-purple-950 to-indigo-950 flex flex-col items-center p-6 overflow-auto relative"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -545,9 +539,9 @@ function App() {
                 ></div>
                 
                 <div className="p-6 flex flex-col items-center text-center h-full relative z-10">
-                  {/* Emoji with glow */}
+                  {/* Icon image with glow */}
                   <motion.div 
-                    className="text-6xl mb-5 relative"
+                    className="w-20 h-20 mb-5 relative flex items-center justify-center"
                     animate={{ 
                       scale: [1, 1.1, 1],
                     }}
@@ -560,7 +554,9 @@ function App() {
                       filter: `drop-shadow(0 0 10px ${mood.accent})`
                     }}
                   >
-                    {mood.emoji}
+                    <span className="text-6xl">
+                      {mood.emoji}
+                    </span>
                   </motion.div>
                   
                   {/* Name with neon effect */}
